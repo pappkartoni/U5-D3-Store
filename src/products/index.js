@@ -27,7 +27,7 @@ productsRouter.get("/", async (req, res, next) => {
             },
             ...(req.query.limit && {limit: req.query.limit}),
             ...(req.query.offset && {offset: req.query.offset}),
-            order: [["name", "ASC"]]
+            order: [(req.query.orderby ? [req.query.orderby, (req.query.dir ? req.query.dir.toUpperCase() : "ASC")] : ["name", (req.query.dir ? req.query.dir.toUpperCase() : "ASC")])]
         })
         res.send(products)
     } catch (error) {
