@@ -25,7 +25,7 @@ productsRouter.get("/", async (req, res, next) => {
                 ...query,
                 ...(req.query.search && {[Op.or]: [{name: {[Op.iLike]: `%${req.query.search}%`}}, {description: {[Op.iLike]: `%${req.query.search}%`}}]})
             },
-            ...(req.query.limit && {limit: req.query.limit}),
+            ...(req.query.limit && {limit: req.query.limit}), // unnecessarily complicated, i don't think limit: null breaks anything
             ...(req.query.offset && {offset: req.query.offset}),
             order: [(req.query.orderby ? [req.query.orderby, (req.query.dir ? req.query.dir.toUpperCase() : "ASC")] : ["productId", (req.query.dir ? req.query.dir.toUpperCase() : "ASC")])]
         })
