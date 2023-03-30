@@ -14,7 +14,7 @@ productsRouter.post("/", async (req, res, next) => {
         const {productId} = await ProductsModel.create(req.body)
         if (req.body.categories) {
             await ProductsCategoriesModel.bulkCreate(
-                req.body.categories.map(cat => {return {productd: productId, categoryId: cat}})
+                req.body.categories.map(cat => {return {productId: productId, categoryId: cat}})
             )
         }
         res.status(201).send({productId})
